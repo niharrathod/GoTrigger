@@ -62,5 +62,5 @@ Schedule API gives scheduleID as response in case of success.
 
 GoTrigger also supports the Abort operation on already scheduled Rest Calls. To About the Schedule, need to provide scheduleID in API.
 ```json
-DELETE http://localhost:9999/api/v1/schedule/{scheduleID}
+DELETE http://localhost:9999/api/v1/schedule/<scheduleID>
 ```
