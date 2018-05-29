@@ -3,7 +3,7 @@ debug
 *.orig
 .gitrepobirth
 
-./vendor/
-./.vscode/
+vendor/
+.vscode/
 
-./GoTrigger
+GoTrigger
