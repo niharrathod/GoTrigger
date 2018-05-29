@@ -1,0 +1,4 @@
+server:
+  contextPath: api/v1
+  port: 9999
+  logPath: gotrigger.log
