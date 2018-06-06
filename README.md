@@ -32,7 +32,7 @@ http://localhost:9999/api/v1/schedule/absolute
 
 ## Relative Schedule
 
-The below example shows relative schedule, It will be wake up after 6 seconds of current time and makes http GET call to www.google.com.
+The below example shows relative schedule, It will be wake up after 6 seconds of current time and makes http POST call to www.google.com.
 
 ```json
 POST http://localhost:9999/api/v1/schedule/relative
