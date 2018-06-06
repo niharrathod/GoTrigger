@@ -32,7 +32,6 @@ func (r *RestClient) Execute() error {
 
 	req.Header.Set(contentType, appJSON)
 
-	// Todo: need to set timeout from the config
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		log.Print(err)
@@ -56,12 +55,12 @@ type Schedule struct {
 	Second int        `json:"second"`
 }
 
-// GetTimer returns the timer for the schedule
+// GetTimer .
 func (s *Schedule) GetTimer() *time.Timer {
 	return time.NewTimer(s.GetDuration())
 }
 
-// GetDuration returns duration for the schedule
+// GetDuration .
 func (s *Schedule) GetDuration() time.Duration {
 	curTime := time.Now()
 	scheduleTime := time.Date(
@@ -75,25 +74,25 @@ func (s *Schedule) GetDuration() time.Duration {
 	return scheduleTime.Sub(curTime)
 }
 
-// RestClientSchedule represents the Rest based schedule
-type RestClientSchedule struct {
+// RestSchedule .
+type RestSchedule struct {
 	ID       string
 	Schedule *Schedule
 	RestReq  *RestClient
 }
 
-// GetID returns identifier of the schedule
-func (rcs *RestClientSchedule) GetID() string {
+// GetID .
+func (rcs *RestSchedule) GetID() string {
 	return rcs.ID
 }
 
-// GetDuration returns duration on which it will be scheduled
-func (rcs *RestClientSchedule) GetDuration() time.Duration {
+// GetDuration .
+func (rcs *RestSchedule) GetDuration() time.Duration {
 	return rcs.Schedule.GetDuration()
 }
 
-// Execute method will be called on schedule wakeup
-func (rcs *RestClientSchedule) Execute() {
+// Execute .
+func (rcs *RestSchedule) Execute() {
 	err := rcs.RestReq.Execute()
 	if err != nil {
 		log.Println("For ID:", rcs.ID, " ", err.Error())

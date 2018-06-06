@@ -8,7 +8,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-// Config represents the config.yaml
+// Config : represents the configuration structure
 type Config struct {
 	Server struct {
 		Port        int    `yaml:"port"`
@@ -23,7 +23,7 @@ type Config struct {
 
 var config Config
 
-// LoadConfig loads the config from given yaml path.
+// LoadConfig : loads configuration from given yaml file.
 func LoadConfig(path string) {
 	ymlpath, err := filepath.Abs(path)
 	if err != nil {

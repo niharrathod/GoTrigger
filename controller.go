@@ -21,13 +21,13 @@ type relativeRequest struct {
 	RestReq RestClient `json:"restRequest"`
 }
 
-// Response : represents as Rest response for the absolute/relative schedule request.
+// Response : response for absolute/relative schedule request.
 type Response struct {
 	ScheduleID string `json:"scheduleID"`
 	Msg        string `json:"msg"`
 }
 
-// AbsoluteSchedule : It is controller for the absolute schedule request.
+// AbsoluteSchedule : controller for absolute schedule request.
 func AbsoluteSchedule(c *gin.Context) {
 	var ar absoluteRequest
 	err := c.BindJSON(&ar)
@@ -36,7 +36,7 @@ func AbsoluteSchedule(c *gin.Context) {
 		return
 	}
 	ID := GetNewUniqueID()
-	var rcs RestClientSchedule
+	var rcs RestSchedule
 	rcs.ID = ID
 	rcs.RestReq = &ar.RestReq
 	rcs.Schedule = &ar.S
@@ -48,7 +48,7 @@ func AbsoluteSchedule(c *gin.Context) {
 	}
 }
 
-// RelativeSchedule : It is controller for the relative schedule request.
+// RelativeSchedule : controller for relative schedule request.
 func RelativeSchedule(c *gin.Context) {
 	var rr relativeRequest
 	err := c.BindJSON(&rr)
@@ -58,7 +58,7 @@ func RelativeSchedule(c *gin.Context) {
 	}
 
 	ID := GetNewUniqueID()
-	var rcs RestClientSchedule
+	var rcs RestSchedule
 	rcs.ID = ID
 	rcs.RestReq = &rr.RestReq
 	rcs.Schedule = GetSchedule(rr.S.Hour, rr.S.Minute, rr.S.Second)
@@ -70,7 +70,7 @@ func RelativeSchedule(c *gin.Context) {
 	}
 }
 
-// AbortSchedule : It is controller to abort the already scheduled request.
+// AbortSchedule : controller to abort the already scheduled request.
 func AbortSchedule(c *gin.Context) {
 	ID := c.Param("id")
 	if len(ID) == 0 {

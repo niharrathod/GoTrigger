@@ -9,15 +9,15 @@ import (
 
 var container scheduledContainer
 
-// ISchedule : scheduler understands the type which satisfies IScheduler interface,
+// ISchedule : scheduler understands the type which satisfies this interface,
 type ISchedule interface {
 	// GetID : returns an Identifier for the Scheduler
 	GetID() string
 
-	// GetDuration : return the Duration at which an activity will be schedule by the scheduler
+	// GetDuration : return the Duration from current time at which schedule should wakeup
 	GetDuration() time.Duration
 
-	// Execute : scheduler call this method on schedule is wake up, i.e. schedule activity triggered.
+	// Execute : scheduler call this method on schedule is wake up
 	Execute()
 }
 
@@ -35,7 +35,7 @@ func Schedule(schedule ISchedule) error {
 	return nil
 }
 
-// Abort : abort already scheduler activity.
+// Abort : abort already scheduled activity.
 func Abort(ID string) error {
 	s, err := container.get(ID)
 	if err != nil {
